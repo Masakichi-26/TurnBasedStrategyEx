@@ -8,19 +8,21 @@ namespace Tactics.Grid
         public int Width { get; }
         public int Depth { get; }
         public int Height { get; }
+        public float CellSize { get; }
 
-        public Grid3D(int w, int d, int h)
+        public Grid3D(int w, int d, int h, float cellSize = 0f)
         {
             Width = Math.Max(w, 1);
             Depth = Math.Max(d, 1);
             Height = Math.Max(h, 1);
+            CellSize = cellSize == 0 ? 1 : Math.Abs(cellSize);
 
             DrawLine();
         }
 
         public Vector3 GetWorldPosition(int x, int y, int z = 0)
         {
-            return new Vector3(x, y, 0);
+            return new Vector3(x, y, z) * CellSize;
         }
 
         private void DrawLine()
