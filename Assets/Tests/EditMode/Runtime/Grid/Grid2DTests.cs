@@ -13,54 +13,54 @@ public class Grid2DTests
             int width = 2;
             int height = 4;
             float cellSize = 1.5f;
-            var grid = new Grid2D(width, height, cellSize);
+            var sut = new Grid2D(width, height, cellSize);
 
-            grid.Width.Should().Be(width);
-            grid.Height.Should().Be(height);
-            grid.CellSize.Should().Be(cellSize);
+            sut.Width.Should().Be(width);
+            sut.Height.Should().Be(height);
+            sut.CellSize.Should().Be(cellSize);
         }
 
         [Test]
         public void Grid2D_depth_is_0_regardless_of_constructor_parameter()
         {
-            var grid = new Grid2D(1, 1, 1f);
+            var sut = new Grid2D(1, 1, 1f);
 
-            grid.Depth.Should().Be(0);
+            sut.Depth.Should().Be(0);
         }
 
         [Test]
         public void Grid2D_must_have_minimum_width_of_1()
         {
             int width = -1;
-            var grid = new Grid2D(width, 10);
+            var sut = new Grid2D(width, 10);
 
-            grid.Width.Should().Be(1);
+            sut.Width.Should().Be(1);
         }
 
         [Test]
         public void Grid2D_must_have_minimum_height_of_1()
         {
             int height = -1;
-            var grid = new Grid2D(10, height);
+            var sut = new Grid2D(10, height);
 
-            grid.Height.Should().Be(1);
+            sut.Height.Should().Be(1);
         }
 
         [Test]
         public void Grid2D_has_default_cell_size_of_1()
         {
-            var grid = new Grid2D(10, 10);
+            var sut = new Grid2D(10, 10);
 
-            grid.CellSize.Should().Be(1);
+            sut.CellSize.Should().Be(1);
         }
 
         [Test]
         public void Grid2D_cell_size_is_positive_even_if_negative_value_is_passed_in()
         {
             float cellSize = -2f;
-            var grid = new Grid2D(10, 10, cellSize);
+            var sut = new Grid2D(10, 10, cellSize);
 
-            grid.CellSize.Should().Be(2);
+            sut.CellSize.Should().Be(2);
         }
     }
 
