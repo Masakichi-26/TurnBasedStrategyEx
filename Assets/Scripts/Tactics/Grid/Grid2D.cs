@@ -24,7 +24,7 @@ namespace Tactics.Grid
 
         public Vector3 GetWorldPosition(int x, int y, int z = 0)
         {
-            return new Vector3(x, y, 0) * CellSize;
+            return GridTopology.GetWorldPosition(x, y, 0, CellSize);
         }
 
         private void DrawLine()
