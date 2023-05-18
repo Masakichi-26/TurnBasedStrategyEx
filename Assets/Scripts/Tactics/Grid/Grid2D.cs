@@ -5,13 +5,15 @@ namespace Tactics.Grid
 {
     public class Grid2D : IGrid
     {
+        public IGridTopology GridTopology;
         public int Width { get; }
         public int Depth { get; }
         public int Height { get; }
         public float CellSize { get; }
 
-        public Grid2D(int w, int h, float cellSize = 0f)
+        public Grid2D(IGridTopology gridTopology, int w, int h, float cellSize = 0f)
         {
+            GridTopology = gridTopology;
             Width = Math.Max(w, 1);
             Depth = 0;
             Height = Math.Max(h, 1);
