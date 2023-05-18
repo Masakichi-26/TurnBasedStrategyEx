@@ -1,36 +1,49 @@
+using FluentAssertions;
 using NUnit.Framework;
 using Tactics.Grid;
 using UnityEngine;
 
 public class Grid2DTests
 {
-    public class Grid2DConstructor
+    private class Grid2DConstructor
     {
         [Test]
-        public void Grid2D_width_depth_height_are_set_from_constructor()
+        public void Grid2D_width_and_height_and_cell_size_are_same_as_constructor_parameters()
         {
-            var grid = new Grid2D(2, 4, 1.5f);
+            int width = 2;
+            int height = 4;
+            float cellSize = 1.5f;
+            var grid = new Grid2D(width, height, cellSize);
 
-            Assert.That(grid.Width, Is.EqualTo(2));
-            Assert.That(grid.Depth, Is.EqualTo(0));
-            Assert.That(grid.Height, Is.EqualTo(4));
-            Assert.That(grid.CellSize, Is.EqualTo(1.5f));
+            grid.Width.Should().Be(width);
+            grid.Height.Should().Be(height);
+            grid.CellSize.Should().Be(cellSize);
+        }
+
+        [Test]
+        public void Grid2D_depth_is_0_regardless_of_constructor_parameter()
+        {
+            var grid = new Grid2D(1, 1, 1f);
+
+            grid.Depth.Should().Be(0);
         }
 
         [Test]
         public void Grid2D_must_have_minimum_width_of_1()
         {
-            var grid = new Grid2D(-1, 10);
+            int width = -1;
+            var grid = new Grid2D(width, 10);
 
-            Assert.That(grid.Width, Is.EqualTo(1));
+            grid.Width.Should().Be(1);
         }
 
         [Test]
         public void Grid2D_must_have_minimum_height_of_1()
         {
-            var grid = new Grid2D(10, -1);
+            int height = -1;
+            var grid = new Grid2D(10, height);
 
-            Assert.That(grid.Height, Is.EqualTo(1));
+            grid.Height.Should().Be(1);
         }
 
         [Test]
@@ -38,28 +51,32 @@ public class Grid2DTests
         {
             var grid = new Grid2D(10, 10);
 
-            Assert.That(grid.CellSize, Is.EqualTo(1));
+            grid.CellSize.Should().Be(1);
         }
 
         [Test]
         public void Grid2D_cell_size_is_positive_even_if_negative_value_is_passed_in()
         {
-            var grid = new Grid2D(10, 10, -2);
+            float cellSize = -2f;
+            var grid = new Grid2D(10, 10, cellSize);
 
-            Assert.That(grid.CellSize, Is.EqualTo(2));
+            grid.CellSize.Should().Be(2);
         }
     }
 
-    public class GetWorldPositionMethod
+    private class GetWorldPositionMethod
     {
-        [Test]
-        public void World_position_is_double_grid_coordinates_when_cell_size_is_2()
+        [TestCase(2f)]
+        [TestCase(1.5f)]
+        public void World_position_is_cellSize_times_as_large_as_grid_coordinates(float cellSize)
         {
-            var grid = new Grid2D(10, 10, 2);
+            var grid = new Grid2D(10, 10, cellSize);
+            int x = 1;
+            int y = 3;
 
-            var pos = grid.GetWorldPosition(1, 2);
+            var pos = grid.GetWorldPosition(x, y);
 
-            Assert.That(pos, Is.EqualTo(new Vector3(2, 4, 0)));
+            pos.Should().Be(new Vector3(x * cellSize, y * cellSize, 0));
         }
     }
 }
