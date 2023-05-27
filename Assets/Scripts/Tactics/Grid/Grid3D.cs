@@ -1,17 +1,20 @@
 using System;
+using Tactics.Grid.Topology;
 using UnityEngine;
 
 namespace Tactics.Grid
 {
     public class Grid3D : IGrid
     {
+        public IGridTopology GridTopology { get; }
         public int Width { get; }
         public int Depth { get; }
         public int Height { get; }
         public float CellSize { get; }
 
-        public Grid3D(int w, int d, int h, float cellSize = 0f)
+        public Grid3D(IGridTopology gridTopology, int w, int d, int h, float cellSize = 0f)
         {
+            GridTopology = gridTopology;
             Width = Math.Max(w, 1);
             Depth = Math.Max(d, 1);
             Height = Math.Max(h, 1);
@@ -20,9 +23,9 @@ namespace Tactics.Grid
             DrawLine();
         }
 
-        public Vector3 GetWorldPosition(int x, int y, int z = 0)
+        public Vector3 GetWorldPosition(IGridPosition pos)
         {
-            return new Vector3(x, y, z) * CellSize;
+            return GridTopology.GetWorldPosition(pos, CellSize);
         }
 
         private void DrawLine()
@@ -33,7 +36,7 @@ namespace Tactics.Grid
                 {
                     for (int z = 0; z < Height; z++)
                     {
-                        var pos = GetWorldPosition(x, y, z);
+                        var pos = GetWorldPosition(new GridPosition(x, y, z));
                         Debug.DrawLine(pos, pos + Vector3.right * .7f, Color.white, 1000);
                     }
                 }

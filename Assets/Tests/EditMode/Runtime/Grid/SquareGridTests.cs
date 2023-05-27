@@ -1,6 +1,8 @@
 using FluentAssertions;
 using NUnit.Framework;
 using Tactics.Grid;
+using Tactics.Grid.Topology;
+using UnityEngine;
 
 public class SquareGridTests
 {
@@ -12,12 +14,13 @@ public class SquareGridTests
         public void World_position_is_cellSize_times_as_large_as_grid_coordinates(int x, int y, int z, float cellSize)
         {
             var sut = new SquareGrid();
+            var pos = new GridPosition(x, y, z);
 
-            var pos = sut.GetWorldPosition(x, y, z, cellSize);
+            Vector3 result = sut.GetWorldPosition(pos, cellSize);
 
-            pos.x.Should().Be(x * cellSize);
-            pos.y.Should().Be(y * cellSize);
-            pos.z.Should().Be(z * cellSize);
+            result.x.Should().Be(x * cellSize);
+            result.y.Should().Be(y * cellSize);
+            result.z.Should().Be(z * cellSize);
         }
     }
 }

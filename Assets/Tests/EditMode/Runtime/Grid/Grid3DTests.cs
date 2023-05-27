@@ -1,11 +1,12 @@
 using FluentAssertions;
+using Moq;
 using NUnit.Framework;
 using Tactics.Grid;
-using UnityEngine;
+using Tactics.Grid.Topology;
 
 public class Grid3DTests
 {
-    public class Grid3DConstructor
+    public class Grid3DConstructor : Grid3DTests
     {
         [Test]
         public void Grid3D_width_and_depth_and_height_and_cell_size_are_same_as_constructor_parameters()
@@ -14,7 +15,7 @@ public class Grid3DTests
             int depth = 4;
             int height = 6;
             float cellSize = 0.5f;
-            var sut = new Grid3D(width, depth, height, cellSize);
+            var sut = CreateGrid(width, depth, height, cellSize);
 
             sut.Width.Should().Be(width);
             sut.Depth.Should().Be(depth);
@@ -26,7 +27,7 @@ public class Grid3DTests
         public void Grid3D_must_have_minimum_width_of_1()
         {
             int width = -1;
-            var sut = new Grid3D(width, 10, 10);
+            var sut = CreateGrid(width, 10, 10);
 
             sut.Width.Should().Be(1);
         }
@@ -35,7 +36,7 @@ public class Grid3DTests
         public void Grid3D_must_have_minimum_depth_of_1()
         {
             int depth = -1;
-            var sut = new Grid3D(10, depth, 10);
+            var sut = CreateGrid(10, depth, 10);
 
             sut.Depth.Should().Be(1);
         }
@@ -44,7 +45,7 @@ public class Grid3DTests
         public void Grid3D_must_have_minimum_height_of_1()
         {
             int height = -1;
-            var sut = new Grid3D(10, 10, height);
+            var sut = CreateGrid(10, 10, height);
 
             sut.Height.Should().Be(1);
         }
@@ -52,7 +53,7 @@ public class Grid3DTests
         [Test]
         public void Grid3D_has_default_cell_size_of_1()
         {
-            var sut = new Grid3D(10, 10, 10);
+            var sut = CreateGrid(10, 10, 10);
 
             sut.CellSize.Should().Be(1);
         }
@@ -61,26 +62,15 @@ public class Grid3DTests
         public void Grid3D_cell_size_is_positive_even_if_negative_value_is_passed_in()
         {
             float cellSize = -5;
-            var sut = new Grid3D(10, 10, 10, cellSize);
+            var sut = CreateGrid(10, 10, 10, cellSize);
 
             sut.CellSize.Should().Be(5);
         }
     }
 
-    public class GetWorldPositionMethod
+    protected Grid3D CreateGrid(int width, int depth, int height, float cellSize = 0f)
     {
-        [TestCase(2f)]
-        [TestCase(1.5f)]
-        public void World_position_is_cellSize_times_as_large_as_grid_coordinates(float cellSize)
-        {
-            var sut = new Grid3D(10, 10, 10, cellSize);
-            int x = 1;
-            int y = 2;
-            int z = 3;
-
-            var pos = sut.GetWorldPosition(x, y, z);
-
-            pos.Should().Be(new Vector3(x * cellSize, y * cellSize, z * cellSize));
-        }
+        var gridTopology = new Mock<IGridTopology>();
+        return new Grid3D(gridTopology.Object, width, depth, height, cellSize);
     }
 }

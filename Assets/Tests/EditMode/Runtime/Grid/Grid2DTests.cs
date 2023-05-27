@@ -2,7 +2,7 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Tactics.Grid;
-using UnityEngine;
+using Tactics.Grid.Topology;
 
 public class Grid2DTests
 {
@@ -62,39 +62,6 @@ public class Grid2DTests
             var sut = CreateGrid(10, 10, cellSize);
 
             sut.CellSize.Should().Be(2);
-        }
-    }
-
-    private class GetWorldPositionMethod : Grid2DTests
-    {
-        private class WhenSquareGrid : GetWorldPositionMethod
-        {
-            [TestCase(1, 3, 2f)]
-            [TestCase(3, 1, 1.5f)]
-            [TestCase(5, 5, 5f)]
-            [TestCase(0, 0, 1f)]
-            public void World_position_x_and_y_are_cellSize_times_as_large_as_grid_coordinates(int x, int y, float cellSize)
-            {
-                var sut = new Grid2D(new SquareGrid(), 10, 10, cellSize);
-
-                var pos = sut.GetWorldPosition(x, y);
-
-                pos.x.Should().Be(x * cellSize);
-                pos.y.Should().Be(y * cellSize);
-            }
-
-            [TestCase(1, 3, 2f)]
-            [TestCase(3, 1, 1.5f)]
-            [TestCase(5, 5, 5f)]
-            [TestCase(0, 0, 1f)]
-            public void World_position_z_is_always_0(int x, int y, float cellSize)
-            {
-                var sut = new Grid2D(new SquareGrid(), 10, 10, cellSize);
-
-                var pos = sut.GetWorldPosition(x, y);
-
-                pos.z.Should().Be(0);
-            }
         }
     }
 
