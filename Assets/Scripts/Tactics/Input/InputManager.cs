@@ -2,14 +2,20 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using VContainer;
 
 public class InputManager : MonoBehaviour
 {
     private PlayerInputActions playerInputActions;
 
+    [Inject]
+    private void Construct(PlayerInputActions playerInputActions)
+    {
+        this.playerInputActions = playerInputActions;
+    }
+
     private void Awake()
     {
-        playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
     }
 

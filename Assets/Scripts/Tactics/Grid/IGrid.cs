@@ -13,6 +13,7 @@ namespace Tactics.Grid
         // size of cells (spaces/tiles) in Unity units
         float CellSize { get; }
 
-        public Vector3 GetWorldPosition(IGridPosition pos);
+        Vector3 GetWorldPosition(IGridPosition pos);
+        IGridPosition GetGridPosition(Vector3 worldPosition);
     }
 }

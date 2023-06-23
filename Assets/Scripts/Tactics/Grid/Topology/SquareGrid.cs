@@ -8,5 +8,14 @@ namespace Tactics.Grid.Topology
         {
             return new Vector3(pos.X, pos.Y, pos.Z) * cellSize;
         }
+
+        public IGridPosition GetGridPosition(Vector3 worldPosition, float cellSize)
+        {
+            var x = Mathf.RoundToInt(worldPosition.x / cellSize);
+            var y = Mathf.RoundToInt(worldPosition.y / cellSize);
+            var z = Mathf.RoundToInt(worldPosition.z / cellSize);
+
+            return new GridPosition(x, y, z);
+        }
     }
 }

@@ -28,6 +28,11 @@ namespace Tactics.Grid
             return GridTopology.GetWorldPosition(pos, CellSize);
         }
 
+        public IGridPosition GetGridPosition(Vector3 worldPosition)
+        {
+            return GridTopology.GetGridPosition(worldPosition, CellSize);
+        }
+
         private void DrawLine()
         {
             for (int x = 0; x < Width; x++)

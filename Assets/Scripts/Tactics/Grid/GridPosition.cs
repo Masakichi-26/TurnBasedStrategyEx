@@ -12,5 +12,10 @@ namespace Tactics.Grid
             Y = y;
             Z = z;
         }
+
+        public override string ToString()
+        {
+            return $"x: {X}; y: {Y}; z: {Z}";
+        }
     }
 }
