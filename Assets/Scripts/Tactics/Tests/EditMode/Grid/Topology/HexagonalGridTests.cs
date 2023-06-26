@@ -17,7 +17,7 @@ namespace Tests.EditMode.Runtime.Grid.Topology
             public void World_position_is_cellSize_times_constant_as_large_as_grid_coordinates_for_x_coordinates_with_even_z(int x, float cellSize)
             {
                 var sut = new HexagonalGrid();
-                var pos = new GridPosition(x, 0, 0);
+                var pos = new GridCoordinates(x, 0, 0);
 
                 Vector3 result = sut.GetWorldPosition(pos, cellSize);
 
@@ -31,7 +31,7 @@ namespace Tests.EditMode.Runtime.Grid.Topology
             public void World_position_is_cellSize_times_constant_as_large_as_grid_coordinates_for_x_coordinates_with_odd_z(int x, float cellSize, float expectedX)
             {
                 var sut = new HexagonalGrid();
-                var pos = new GridPosition(x, 0, 1);
+                var pos = new GridCoordinates(x, 0, 1);
 
                 Vector3 result = sut.GetWorldPosition(pos, cellSize);
 
@@ -45,7 +45,7 @@ namespace Tests.EditMode.Runtime.Grid.Topology
             public void World_position_is_cellSize_times_as_large_as_grid_coordinates_for_y_coordinates(int y, float cellSize)
             {
                 var sut = new HexagonalGrid();
-                var pos = new GridPosition(0, y, 0);
+                var pos = new GridCoordinates(0, y, 0);
 
                 Vector3 result = sut.GetWorldPosition(pos, cellSize);
 
@@ -59,7 +59,7 @@ namespace Tests.EditMode.Runtime.Grid.Topology
             public void World_position_is_cellSize_times_constant_as_large_as_grid_coordinates_for_z_coordinates(int z, float cellSize, float expectedZ)
             {
                 var sut = new HexagonalGrid();
-                var pos = new GridPosition(0, 0, z);
+                var pos = new GridCoordinates(0, 0, z);
 
                 Vector3 result = sut.GetWorldPosition(pos, cellSize);
 

@@ -7,7 +7,7 @@ namespace Tactics.Grid.Topology
         private const float HORIZONTAL_OFFSET_MULTIPLIER = 0.5f;
         private const float VERTICAL_OFFSET_MULTIPLIER = 0.75f;
 
-        public Vector3 GetWorldPosition(IGridPosition pos, float cellSize)
+        public Vector3 GetWorldPosition(IGridCoordinates pos, float cellSize)
         {
             var xVector = new Vector3(pos.X, 0, 0) * cellSize;
             var yVector = new Vector3(0, pos.Y, 0) * cellSize;
@@ -22,13 +22,13 @@ namespace Tactics.Grid.Topology
         }
 
         // TODO
-        public IGridPosition GetGridPosition(Vector3 worldPosition, float cellSize)
+        public IGridCoordinates GetGridPosition(Vector3 worldPosition, float cellSize)
         {
             var x = Mathf.RoundToInt(worldPosition.x / cellSize);
             var y = Mathf.RoundToInt(worldPosition.y / cellSize);
             var z = Mathf.RoundToInt(worldPosition.z / cellSize);
 
-            return new GridPosition(x, y, z);
+            return new GridCoordinates(x, y, z);
         }
     }
 }

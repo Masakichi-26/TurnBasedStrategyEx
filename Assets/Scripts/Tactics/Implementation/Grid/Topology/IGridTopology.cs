@@ -4,7 +4,7 @@ namespace Tactics.Grid.Topology
 {
     public interface IGridTopology
     {
-        Vector3 GetWorldPosition(IGridPosition pos, float cellSize);
-        IGridPosition GetGridPosition(Vector3 worldPosition, float cellSize);
+        Vector3 GetWorldPosition(IGridCoordinates pos, float cellSize);
+        IGridCoordinates GetGridPosition(Vector3 worldPosition, float cellSize);
     }
 }

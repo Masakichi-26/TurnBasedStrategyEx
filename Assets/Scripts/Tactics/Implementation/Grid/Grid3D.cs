@@ -23,12 +23,12 @@ namespace Tactics.Grid
             DrawLine();
         }
 
-        public Vector3 GetWorldPosition(IGridPosition pos)
+        public Vector3 GetWorldPosition(IGridCoordinates pos)
         {
             return GridTopology.GetWorldPosition(pos, CellSize);
         }
 
-        public IGridPosition GetGridPosition(Vector3 worldPosition)
+        public IGridCoordinates GetGridPosition(Vector3 worldPosition)
         {
             return GridTopology.GetGridPosition(worldPosition, CellSize);
         }
@@ -41,7 +41,7 @@ namespace Tactics.Grid
                 {
                     for (int z = 0; z < Height; z++)
                     {
-                        var pos = GetWorldPosition(new GridPosition(x, y, z));
+                        var pos = GetWorldPosition(new GridCoordinates(x, y, z));
                         Debug.DrawLine(pos, pos + Vector3.right * .7f, Color.white, 1000);
                     }
                 }

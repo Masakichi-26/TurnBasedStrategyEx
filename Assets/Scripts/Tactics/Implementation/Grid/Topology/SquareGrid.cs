@@ -4,18 +4,18 @@ namespace Tactics.Grid.Topology
 {
     public class SquareGrid : IGridTopology
     {
-        public Vector3 GetWorldPosition(IGridPosition pos, float cellSize)
+        public Vector3 GetWorldPosition(IGridCoordinates pos, float cellSize)
         {
             return new Vector3(pos.X, pos.Y, pos.Z) * cellSize;
         }
 
-        public IGridPosition GetGridPosition(Vector3 worldPosition, float cellSize)
+        public IGridCoordinates GetGridPosition(Vector3 worldPosition, float cellSize)
         {
             var x = Mathf.RoundToInt(worldPosition.x / cellSize);
             var y = Mathf.RoundToInt(worldPosition.y / cellSize);
             var z = Mathf.RoundToInt(worldPosition.z / cellSize);
 
-            return new GridPosition(x, y, z);
+            return new GridCoordinates(x, y, z);
         }
     }
 }

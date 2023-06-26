@@ -17,7 +17,7 @@ public class HexagonalGridTesting : MonoBehaviour
     void Start()
     {
         grid = new Grid3D(new HexagonalGrid(), 10, 1, 10);
-        Debug.Log(new GridPosition(1, 2, 3));
+        Debug.Log(new GridCoordinates(1, 2, 3));
     }
 
     void Update()

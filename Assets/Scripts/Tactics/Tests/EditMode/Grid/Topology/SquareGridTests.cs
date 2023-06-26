@@ -16,7 +16,7 @@ namespace Tests.EditMode.Runtime.Grid.Topology
             public void World_position_is_cellSize_times_as_large_as_grid_coordinates(int x, int y, int z, float cellSize)
             {
                 var sut = new SquareGrid();
-                var pos = new GridPosition(x, y, z);
+                var pos = new GridCoordinates(x, y, z);
 
                 Vector3 result = sut.GetWorldPosition(pos, cellSize);
 
