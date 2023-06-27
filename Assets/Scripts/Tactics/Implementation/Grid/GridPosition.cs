@@ -8,5 +8,10 @@ namespace Tactics.Grid
         {
             GridCoordinates = coordinates;
         }
+
+        public override string ToString()
+        {
+            return GridCoordinates.ToString();
+        }
     }
 }

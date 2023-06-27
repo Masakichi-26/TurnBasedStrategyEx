@@ -15,5 +15,6 @@ namespace Tactics.Grid
 
         Vector3 GetWorldPosition(IGridCoordinates pos);
         IGridCoordinates GetGridPosition(Vector3 worldPosition);
+        IGridPosition GetGridPosition(IGridCoordinates coordinates);
     }
 }

@@ -33,6 +33,11 @@ namespace Tactics.Grid
             return GridTopology.GetGridPosition(worldPosition, CellSize);
         }
 
+        public IGridPosition GetGridPosition(IGridCoordinates coordinates)
+        {
+            return new GridPosition(new GridCoordinates(0, 0, 0));
+        }
+
         private void DrawLine()
         {
             for (int x = 0; x < Width; x++)
