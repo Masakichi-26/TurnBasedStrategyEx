@@ -14,12 +14,12 @@ namespace Tactics.Grid
 
         private IGridPosition[,] gridPositionArray { get; }
 
-        public Grid2D(IGridTopology gridTopology, int w, int h, float cellSize = 0f)
+        public Grid2D(IGridTopology gridTopology, int width, int height, float cellSize = 0f)
         {
             GridTopology = gridTopology;
-            Width = Math.Max(w, 1);
+            Width = Math.Max(width, 1);
             Depth = 0;
-            Height = Math.Max(h, 1);
+            Height = Math.Max(height, 1);
             CellSize = cellSize == 0 ? 1 : Math.Abs(cellSize);
 
             // DrawLine();

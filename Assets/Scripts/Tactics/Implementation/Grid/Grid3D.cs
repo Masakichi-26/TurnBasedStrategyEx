@@ -12,12 +12,12 @@ namespace Tactics.Grid
         public int Height { get; }
         public float CellSize { get; }
 
-        public Grid3D(IGridTopology gridTopology, int w, int d, int h, float cellSize = 0f)
+        public Grid3D(IGridTopology gridTopology, int width, int depth, int height, float cellSize = 0f)
         {
             GridTopology = gridTopology;
-            Width = Math.Max(w, 1);
-            Depth = Math.Max(d, 1);
-            Height = Math.Max(h, 1);
+            Width = Math.Max(width, 1);
+            Depth = Math.Max(depth, 1);
+            Height = Math.Max(height, 1);
             CellSize = cellSize == 0 ? 1 : Math.Abs(cellSize);
 
             DrawLine();
