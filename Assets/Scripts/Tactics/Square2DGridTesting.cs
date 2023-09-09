@@ -26,6 +26,6 @@ public class Square2DGridTesting : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(grid.GetGridPosition(mouseWorld.GetPosition()));
+        // Debug.Log(grid.GetGridPosition(mouseWorld.GetPosition()));
     }
 }

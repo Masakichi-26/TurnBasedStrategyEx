@@ -72,6 +72,8 @@ namespace Tactics.Grid
                 {
                     var coordinates = new GridCoordinates(x, y, 0);
                     Transform debugTransform = GameObject.Instantiate(debugPrefab, GetWorldPosition(coordinates), Quaternion.identity, parent);
+                    var pos = debugTransform.transform.position;
+                    debugTransform.transform.position = new Vector3(pos.x, pos.y, parent.transform.position.z);
                     GridDebugObject gridDebugObject = debugTransform.GetComponent<GridDebugObject>();
                     gridDebugObject.SetGridObject(GetGridPosition(coordinates));
                 }
